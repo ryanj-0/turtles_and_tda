@@ -13,7 +13,6 @@ my.colors <- c("#0072B2","#E69F00", "#71CCFF", "#F0E442", "#CC79A7")
 #source needed fxns and files
 source(paste0(dir,"/load_pkgs.R"))
 source(paste0(dir,"/personals.R"))
-
 source(paste0(fxn.dir,"/clean_turtles.R"))
 
 #list rds files
@@ -29,8 +28,8 @@ turtle.data.all <- do.call(rbind, rds.data)
 turtle.names <- c('date', 'water', 'chem', 'measure',
                   'starting.notes.z1', 'z1',
                   'pct.zero.ca.z1', 'pct.delta.prior.z1', 'notes.z1',
-                  'starting.notes.z2',
-                  'z2', 'pct.zero.ca.z2', 'pct.delta.prior.z2', 'notes.z2')
+                  'starting.notes.z2', 'z2',
+                  'pct.zero.ca.z2', 'pct.delta.prior.z2', 'notes.z2')
 setcolorder(turtle.data.all, turtle.names)
 
 turtle.data.all[, pct.delta.prior.z1:=as.numeric(pct.delta.prior.z1)] |>
