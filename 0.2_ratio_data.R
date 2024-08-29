@@ -62,5 +62,7 @@ for (n in 1:nrow(ratio.data)) {
 ratio.data <- cbind(ratio.data, water.cont, chem.cont)
 
 # remove unneeded variables
-rm(ratio1, ratio2)
+rm(ratio1, ratio2,
+   water.cont, chem.cont,
+   n, x)
 return(ratio.data)

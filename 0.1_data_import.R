@@ -42,3 +42,6 @@ if(turtle.data |> is.na() |> rowSums() |> sum()){
     message("Rows which contain NA: ")
     print(turtle.data.nas)
 }
+
+# variable clean up
+rm(turtle.names)

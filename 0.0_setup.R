@@ -1,8 +1,8 @@
-# Clear environment and reset graphical devices
-rm(list = ls())
-
 # set directories
-dir <- getwd()
+if(dir != getwd()){
+    dir <- getwd()
+}
+
 data.dir <- paste0(dir, "/data")
 fxn.dir <- paste0(dir, "/functions")
 plots.dir <- paste0(dir, "/plots")
@@ -21,12 +21,4 @@ source(paste0(dir, "/0.1_data_import.R"))
 
 # create ratio metric data table ------------------------------------------
 source(paste0(dir, "/0.2_ratio_data.R"))
-
-
-# BM Graphs Loop ----------------------------------------------------------
-c.list <- ls()[ls() %like% "cc."]
-source(paste0(fxn.dir, "/set_pointcloud_coloring.R"))
-source(paste0(fxn.dir, "/loop_bm_graphs.R"))
-
-foreach(i=c.list) %do% loop_bm_graphs(i)
 
