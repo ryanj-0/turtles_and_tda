@@ -35,10 +35,19 @@ g.plot <- ggplot(ratio.data, aes(x = diameter)) +
 print(g.plot)
 
 # over time
-g.plot <- ggplot(ratio.data, aes(x = date)) +
+g.temp <- ggplot(ratio.data, aes(x = date)) +
     geom_bar(aes(fill = water)) +
     scale_x_date(date_labels = "%b %y",
                  date_breaks = "1 month") +
-    labs(title = "data collection over time by water temp",
-         caption = "Source: ratio.data")
+    labs(title = "by water temp")
+
+g.chem <- ggplot(ratio.data, aes(x = date)) +
+    geom_bar(aes(fill = chem)) +
+    scale_x_date(date_labels = "%b %y",
+                 date_breaks = "1 month") +
+    labs(title = "by chemical")
+
+g.plot <- g.temp/g.chem +
+    plot_annotation(title = "data collection over time",
+                    caption = "Source: ratio.data")
 print(g.plot)

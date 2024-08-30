@@ -1,6 +1,6 @@
 #######################################
 # Load in data from data directory
-# ran 20231015 (universal date)
+# ran 20231015
 #######################################
 
 # file dir

@@ -17,8 +17,8 @@ source(paste0(scripts.dir,"/personals.R"))
 source(paste0(fxn.dir,"/clean_turtles.R"))
 
 # import data
-source(paste0(dir, "/0.1_data_import.R"))
+source(paste0(dir, "/data_import.R"))
 
 # create ratio metric data table ------------------------------------------
-source(paste0(dir, "/0.2_ratio_data.R"))
+source(paste0(dir, "/ratio_data.R"))
 
