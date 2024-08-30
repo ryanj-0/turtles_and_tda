@@ -14,11 +14,4 @@ my.colors <- c("#0072B2","#E69F00", "#71CCFF", "#F0E442", "#CC79A7")
 #source needed fxns, files, and pkgs
 source(paste0(scripts.dir,"/load_pkgs.R"))
 source(paste0(scripts.dir,"/personals.R"))
-source(paste0(fxn.dir,"/clean_turtles.R"))
-
-# import data
-source(paste0(dir, "/data_import.R"))
-
-# create ratio metric data table ------------------------------------------
-source(paste0(dir, "/ratio_data.R"))
 
