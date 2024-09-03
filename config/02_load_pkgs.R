@@ -6,33 +6,21 @@ if (!require("pacman", character.only = TRUE)) {
 }
 
 # List of packages to be loaded
-pkgs <- c("aws.s3",
-          "BallMapper",
-          "colorBlindness",
-          "colorspace",
-          "cowplot",
+pkgs <- c("BallMapper",
           "data.table",
           "foreach",
           "furrr",
           "future",
           "future.apply",
           "ggExtra",
-          "GGally",
           "ggrepel",
           "ggthemes",
           "googledrive",
           "googlesheets4",
-          "httr",
           "igraph",
           "network",
           "patchwork",
-          "plotly",
           "readxl",
-          "rvest",
-          "tidyverse",
-          "tidymodels",
-          "wesanderson")
+          "tidyverse")
 
 pacman::p_load(pkgs, character.only = TRUE, dependencies = TRUE)
-message("System Initialized, packages loaded:")
-print(pacman::p_loaded() %>% sort())
