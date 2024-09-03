@@ -12,7 +12,7 @@ for (f in config.files) {
     source(paste(getwd(), "config", f, sep = "/"))
     message(f)
 }
-
+rm(config.files)
 
 # etl
 source(paste(src.dir, "run_etl.R", sep = "/"))
