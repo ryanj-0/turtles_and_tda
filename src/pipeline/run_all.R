@@ -14,5 +14,8 @@ for (f in config.files) {
 }
 rm(config.files)
 
-# etl
-source(paste(src.dir, "run_etl.R", sep = "/"))
+# ETL
+source(paste(src.dir, "pipeline", "run_etl.R", sep = "/"))
+
+# EDA
+source(paste(src.dir, "pipeline", "run_eda.R", sep = "/"))
