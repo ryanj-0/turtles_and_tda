@@ -3,7 +3,8 @@
 ############################
 
 # Load Needed Functions ---------------------------------------------------
-source(paste0(fxn.dir,"/clean_turtles.R"))
+source(paste(getwd(),"src", "functions","clean_turtles.R",
+             sep = "/"))
 
 # Extract -----------------------------------------------------------------
 

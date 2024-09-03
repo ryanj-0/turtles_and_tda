@@ -5,11 +5,14 @@
 rm(list = ls())
 try(dev.off(dev.list()["RStudioGD"]), silent=TRUE)
 
-# set global dir
-dir <- getwd()
+# load config
+config.files <- list.files(paste(getwd(), "config", sep = "/"))
 
-# Setup
-source(paste0(dir, "/0.0_setup.R"))
+for (f in config.files) {
+    source(paste(getwd(), "config", f, sep = "/"))
+    message(f)
+}
 
-# EDA
-source(paste0(dir, "/1.0_eda.R"))
+
+# etl
+source(paste(src.dir, "run_etl.R", sep = "/"))
