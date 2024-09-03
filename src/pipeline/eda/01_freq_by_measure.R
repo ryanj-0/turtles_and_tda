@@ -21,14 +21,14 @@ print(g.plot)
 
 # save and clean up
 if(final == 1){
-    ggsave(paste(results.dir, "final", "freq_by_measure.pdf", sep = "/"),
+    ggsave("freq_by_measure.pdf",
            plot = g.plot,
-           path = plots.dir,
+           path = paste(results.dir, "final", sep = "/"),
            width = 14, height = 6.32, units = "in")
 }else {
-    ggsave(paste(results.dir, "test", "freq_by_measure.pdf", sep = "/"),
+    ggsave("freq_by_measure.pdf",
            plot = g.plot,
-           path = plots.dir,
+           path = paste(results.dir, "test", sep = "/"),
            width = 14, height = 6.32, units = "in")
 }
 rm(g.plot)

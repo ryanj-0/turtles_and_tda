@@ -31,14 +31,14 @@ print(g.plot)
 
 # save and clean up
 if(final == 1){
-    ggsave(paste(results.dir, "final", "observations_by_water_temp.pdf", sep = "/"),
+    ggsave("observations_by_water_temp.pdf",
            plot = g.plot,
-           path = plots.dir,
+           path = paste(results.dir, "final", sep = "/"),
            width = 14, height = 6.32, units = "in")
 }else {
-    ggsave(paste(results.dir, "test", "observations_by_water_temp.pdf", sep = "/"),
+    ggsave("observations_by_water_temp.pdf",
            plot = g.plot,
-           path = plots.dir,
+           path = paste(results.dir, "test", sep = "/"),
            width = 14, height = 6.32, units = "in")
 }
 
