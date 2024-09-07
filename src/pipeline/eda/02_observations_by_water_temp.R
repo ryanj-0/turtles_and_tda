@@ -21,8 +21,7 @@ g.plot <- water.groups |>
         title = "Observations by Water Temperature",
         caption = paste("N =", nrow(turtle.data)),
         x = "Water Temperature", y = "Count",
-        fill = "Chemical"
-        ) +
+        fill = "Chemical") +
     scale_fill_manual(values = my.colors) +
     scale_y_continuous(expand = expansion(mult = c(0, 0.05)))
 
@@ -33,17 +32,15 @@ print(g.plot)
 if(final == 1){
     ggsave("observations_by_water_temp.pdf",
            plot = g.plot,
-           path = paste(results.dir, "final", sep = "/"),
+           path = paste(results.dir, "final", sep = '/'),
            width = 14, height = 6.32, units = "in")
-}else {
+} else {
     ggsave("observations_by_water_temp.pdf",
            plot = g.plot,
-           path = paste(results.dir, "test", sep = "/"),
+           path = paste(results.dir, "test", sep = '/'),
            width = 14, height = 6.32, units = "in")
 }
 
-rm(
-    water.tots,
-    water.groups,
-    g.plot
-)
+rm(water.tots,
+   water.groups,
+   g.plot)

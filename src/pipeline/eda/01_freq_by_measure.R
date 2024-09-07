@@ -9,8 +9,7 @@ g.plot <- turtle.data |>
         subtitle = "Total Counts",
         caption = paste("N =", nrow(turtle.data)),
         x = "Counts", y = "Type of Measure",
-        fill = "Chemical:"
-        ) +
+        fill = "Chemical:") +
     scale_fill_manual(values = my.colors,
                      breaks = turtle.data$chem %>% unique()) +
     scale_x_continuous(expand = expansion(mult = c(0, 0.05))) +
@@ -23,12 +22,12 @@ print(g.plot)
 if(final == 1){
     ggsave("freq_by_measure.pdf",
            plot = g.plot,
-           path = paste(results.dir, "final", sep = "/"),
+           path = paste(results.dir, "final", sep = '/'),
            width = 14, height = 6.32, units = "in")
-}else {
+} else {
     ggsave("freq_by_measure.pdf",
            plot = g.plot,
-           path = paste(results.dir, "test", sep = "/"),
+           path = paste(results.dir, "test", sep = '/'),
            width = 14, height = 6.32, units = "in")
 }
 rm(g.plot)

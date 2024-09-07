@@ -8,15 +8,15 @@ final <- 0
 # Load Needed Functions ---------------------------------------------------
 
 # Frequency plot by Measure -----------------------------------------------
-source(paste(eda.dir, "01_freq_by_measure.R", sep = "/"))
+source(paste(eda.dir, "01_freq_by_measure.R", sep = '/'))
 
 # Observations by Water Temperature ---------------------------------------
-source(paste(eda.dir, "02_observations_by_water_temp.R", sep = "/"))
+source(paste(eda.dir, "02_observations_by_water_temp.R", sep = '/'))
 
 
 # Plots -------------------------------------------------------------------
 
-# by zones
+# pct.zero.ca by zones
 g.plot <- ggplot(ratio.data, aes(x = pct.zero.ca)) +
     geom_histogram(color = "grey30", fill = "lightblue",
                    bins = 50) +
@@ -26,6 +26,7 @@ g.plot <- ggplot(ratio.data, aes(x = pct.zero.ca)) +
          caption = "Source: ratio.data")
 print(g.plot)
 
+# pct.delta.prior by zones
 g.plot <- ggplot(ratio.data, aes(x = pct.delta.prior)) +
     geom_histogram(color = "grey30", fill = "lightblue",
                    bins = 50) +
@@ -35,6 +36,7 @@ g.plot <- ggplot(ratio.data, aes(x = pct.delta.prior)) +
          caption = "Source: ratio.data")
 print(g.plot)
 
+# diameter by zones
 g.plot <- ggplot(ratio.data, aes(x = diameter)) +
     geom_histogram(color = "grey30", fill = "lightblue",
                    bins = 50) +
@@ -44,15 +46,17 @@ g.plot <- ggplot(ratio.data, aes(x = diameter)) +
          caption = "Source: ratio.data")
 print(g.plot)
 
-# over time
+# data collection over time
 g.temp <- ggplot(ratio.data, aes(x = date)) +
     geom_bar(aes(fill = water)) +
+    scale_fill_manual(values = my.colors) +
     scale_x_date(date_labels = "%b %y",
                  date_breaks = "1 month") +
     labs(title = "by water temp")
 
 g.chem <- ggplot(ratio.data, aes(x = date)) +
     geom_bar(aes(fill = chem)) +
+    scale_fill_manual(values = my.colors) +
     scale_x_date(date_labels = "%b %y",
                  date_breaks = "1 month") +
     labs(title = "by chemical")
