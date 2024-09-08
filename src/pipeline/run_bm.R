@@ -1,3 +1,17 @@
+###############################
+# Run full BallMapper pipeline
+
+# approx. runtime:
+# cpu: intel 9980HK
+###############################
+
+
+# Function Load -----------------------------------------------------------
+source(paste(getwd(), "src/functions/single_ballmapper.R"))
+
+
+
+
 # graphs looking at connected components over time ----------------
 # epsilon bound table
 temps <- c("all", "21CN", "21CA", "5CA", "5CN") |> rep(2)
