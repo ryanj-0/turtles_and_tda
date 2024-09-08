@@ -5,7 +5,6 @@
 # cpu: intel 9980HK
 ###############################
 
-
 # Function Load -----------------------------------------------------------
 source(paste(getwd(), "src/functions/single_ballmapper.R"))
 
