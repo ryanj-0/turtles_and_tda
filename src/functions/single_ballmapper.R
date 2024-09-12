@@ -9,17 +9,19 @@ single_ballmapper <- function(pointcloud,
                             epsilon = epsilon)
 
     # Graphing
-    single.bm.plot <- ColorIgraphPlot(outputFromBallMapper = single.bm,
-                                      seed_for_plotting = 27)
+    bm.plot <- ColorIgraphPlot(outputFromBallMapper = single.bm,
+                               seed_for_plotting = 27)
     title(
-        main = paste("Chemical:", chemical,
+        main = paste("Chemical:", paste(chemical, collapse = ' | '),
+                     "\nWater Temp:", paste(water.temp, collapse = ' | '),
                      "\nEpsilon:", epsilon,
-                     "\nColoring:", coloring.variable,
                      sep = ' '),
 
-        sub = paste("Pointcloud:",
-                    paste(names(pointcloud), collapse = ' | '),
+        sub = paste("Pointcloud:", paste(names(pointcloud), collapse = ' | '),
+                    "\nColoring:", coloring.variable,
+                    "\nN:", pc[, .N],
                     sep = ' ')
         )
 
+    return(single.bm)
 }
