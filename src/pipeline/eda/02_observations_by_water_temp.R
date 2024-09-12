@@ -32,12 +32,12 @@ print(g.plot)
 if(final == 1){
     ggsave("observations_by_water_temp.pdf",
            plot = g.plot,
-           path = paste(getwd(), "results/final", sep = '/'),
+           path = paste(getwd(), "results/final/eda", sep = '/'),
            width = 14, height = 6.32, units = "in")
 } else {
     ggsave("observations_by_water_temp.pdf",
            plot = g.plot,
-           path = paste(getwd(), "results/test", sep = '/'),
+           path = paste(getwd(), "results/test/eda", sep = '/'),
            width = 14, height = 6.32, units = "in")
 }
 

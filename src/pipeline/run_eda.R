@@ -2,7 +2,6 @@
 # Run full EDA pipeline
 ############################
 # set globals
-eda.dir <- paste(getwd(), "src/pipeline", "eda", sep = "/")
 final <- 0 # place in results/final
 
 # Load Needed Functions ---------------------------------------------------

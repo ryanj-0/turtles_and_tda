@@ -1,6 +1,8 @@
 ###############################
 # Run full BallMapper pipeline
 ###############################
+#globals
+final <- 0 # place in results/final
 
 # Function Load -----------------------------------------------------------
 source(paste(getwd(), "src/functions/single_ballmapper.R", sep = '/'))
@@ -8,8 +10,8 @@ source(paste(getwd(), "src/functions/single_ballmapper.R", sep = '/'))
 # Single BallMapper -------------------------------------------------------
 # parameters
 c.value <- 0
-chemical <- "acetyl"
-water.temp <- "5CA"
+chemical <- "hist"
+water.temp <- "all"
 coloring.variable <- "water.cont"
 
 # check for args
@@ -37,7 +39,7 @@ c <- ratio.data[correction == c.value &
                       eval())]
 
 # epsilon
-e <- 0.9
+e <- 0.068
 
 single_ballmapper(pointcloud = pc, coloring = c, epsilon = e)|>
     system.time()
