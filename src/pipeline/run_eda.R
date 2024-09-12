@@ -2,16 +2,17 @@
 # Run full EDA pipeline
 ############################
 # set globals
-eda.dir <- paste(src.dir, "pipeline", "eda", sep = "/")
-final <- 0
+eda.dir <- paste(getwd(), "src/pipeline", "eda", sep = "/")
+final <- 0 # place in results/final
 
 # Load Needed Functions ---------------------------------------------------
 
 # Frequency plot by Measure -----------------------------------------------
-source(paste(eda.dir, "01_freq_by_measure.R", sep = '/'))
+source(paste(getwd(), "src/pipeline/eda/01_freq_by_measure.R", sep = '/'))
 
 # Observations by Water Temperature ---------------------------------------
-source(paste(eda.dir, "02_observations_by_water_temp.R", sep = '/'))
+source(paste(getwd(), "src/pipeline/eda/02_observations_by_water_temp.R",
+             sep = '/'))
 
 
 # Plots -------------------------------------------------------------------

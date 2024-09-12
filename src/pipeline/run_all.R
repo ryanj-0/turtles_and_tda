@@ -12,10 +12,10 @@ for (f in config.files) {
     source(paste(getwd(), "config", f, sep = "/"))
     message(f)
 }
-rm(config.files)
+rm(f, config.files)
 
 # ETL
-source(paste(src.dir, "pipeline", "run_etl.R", sep = "/"))
+source(paste(getwd(), "src/pipeline", "run_etl.R", sep = "/"))
 
 # EDA
-source(paste(src.dir, "pipeline", "run_eda.R", sep = "/"))
+source(paste(getwd(), "src/pipeline", "run_eda.R", sep = "/"))

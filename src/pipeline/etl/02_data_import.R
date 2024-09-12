@@ -1,9 +1,10 @@
 #list rds files
-rds.data <- list.files(data.dir, pattern = ".rds") |>
+rds.data <- list.files(paste(getwd(), "data/extracted", sep = '/'),
+                       pattern = ".rds") |>
     _[-5] # drop hist_base
 
 #run clean_turtles
-rds.data <- lapply(rds.data, clean.turtles) |>
+rds.data <- lapply(rds.data, clean_turtles) |>
     invisible()
 
 #combine and reorder
@@ -34,14 +35,6 @@ turtle.data <- turtle.data.all[, .(date, water, chem, measure,
 
 # fix one-offs
 turtle.data[measure %like% "accidental", 4:= "33.3 uM*"]
-
-# Check NAs in data
-if(turtle.data |> is.na() |> rowSums() |> sum()){
-    which(turtle.data.nas > 0)
-    turtle.data.nas <- which(turtle.data.nas > 0)
-    message("Rows which contain NA: ")
-    print(turtle.data.nas)
-}
 
 # variable clean up
 rm(turtle.names)
