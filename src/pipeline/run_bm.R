@@ -39,10 +39,10 @@ c <- ratio.data[correction == c.value &
                       eval())]
 
 # epsilon
-e <- 0.1
+e <- 0.15
 
 single_ballmapper(pointcloud = pc, coloring = c,
-                  epsilon = e, return_bm = FALSE) |> system.time()
+                  epsilon = e, return_bm = TRUE) |> system.time()
 
 
 # BM Graphs Loop ----------------------------------------------------------
