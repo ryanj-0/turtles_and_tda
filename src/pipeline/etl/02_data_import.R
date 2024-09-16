@@ -1,7 +1,7 @@
 #list rds files
 rds.data <- list.files(paste(getwd(), "data/extracted", sep = '/'),
-                       pattern = ".rds") |>
-    _[-5] # drop hist_base
+                       pattern = ".rds") %>%
+    .[-5] # drop hist_base
 
 #run clean_turtles
 rds.data <- lapply(rds.data, clean_turtles) |>
@@ -16,16 +16,16 @@ turtle.names <- c('date', 'water', 'chem', 'measure',
                   'pct.zero.ca.z2', 'pct.delta.prior.z2', 'notes.z2')
 setcolorder(turtle.data.all, turtle.names)
 
-turtle.data.all[, pct.delta.prior.z1:=as.numeric(pct.delta.prior.z1)] |>
-    _[, pct.delta.prior.z2:=as.numeric(pct.delta.prior.z2)]
+turtle.data.all[, pct.delta.prior.z1:=as.numeric(pct.delta.prior.z1)] %>%
+    .[, pct.delta.prior.z2:=as.numeric(pct.delta.prior.z2)]
 
 # NAs to 0
-turtle.data.all[is.na(z1), z1:= 0] |>
-    _[is.na(z2), z2:= 0] |>
-    _[is.na(pct.zero.ca.z1), pct.zero.ca.z1:= 0] |>
-    _[is.na(pct.zero.ca.z2), pct.zero.ca.z2:= 0] |>
-    _[is.na(pct.delta.prior.z1), pct.delta.prior.z1:= 0] |>
-    _[is.na(pct.delta.prior.z2), pct.delta.prior.z2:= 0]
+turtle.data.all[is.na(z1), z1:= 0] %>%
+    .[is.na(z2), z2:= 0] %>%
+    .[is.na(pct.zero.ca.z1), pct.zero.ca.z1:= 0] %>%
+    .[is.na(pct.zero.ca.z2), pct.zero.ca.z2:= 0] %>%
+    .[is.na(pct.delta.prior.z1), pct.delta.prior.z1:= 0] %>%
+    .[is.na(pct.delta.prior.z2), pct.delta.prior.z2:= 0]
 
 # Make Final data set; drop cols with "...notes"
 turtle.data <- turtle.data.all[, .(date, water, chem, measure,
