@@ -15,12 +15,14 @@ single_ballmapper <- function(pointcloud,
     # Graphing
     if(return_bm) {
 
-        file.name <- paste0(paste(chemical, water.temp, e, sep = '_'), ".pdf")
+        pdf.name <- paste0(paste(chemical, water.temp, e, sep = '_'), ".pdf")
 
         if(final == 1){
-            pdf(paste(getwd(), "results/final/bm", file.name, sep = '/'))
+            pdf.path <- paste(getwd(), "results/final/bm", pdf.name, sep = '/')
+            pdf(pdf.path)
         } else {
-            pdf(paste(getwd(), "results/test/bm", file.name, sep = '/'))
+            pdf.path <- paste(getwd(), "results/test/bm", pdf.name, sep = '/')
+            pdf(pdf.path)
         }
     }
 
@@ -39,6 +41,9 @@ single_ballmapper <- function(pointcloud,
                     sep = ' ')
     )
 
-    if(return_bm) dev.off()
+    if(return_bm) {
 
+        message(paste("Created:", pdf.path, sep = ' '))
+        dev.off()
+    }
 }
