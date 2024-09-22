@@ -1,7 +1,7 @@
 single_ballmapper <- function(pointcloud,
                               coloring,
                               epsilon,
-                              return_bm = TRUE) {
+                              save_bm = TRUE) {
     # Error checking, TBD
 
     # Set locals
@@ -13,16 +13,16 @@ single_ballmapper <- function(pointcloud,
                             epsilon = epsilon)
 
     # Graphing
-    if(return_bm) {
+    if(save_bm) {
 
-        pdf.name <- paste0(paste(chemical, water.temp, e, sep = '_'), ".pdf")
+        svg.name <- paste0(paste(chemical, water.temp, e, sep = '_'), ".svg")
 
         if(final == 1){
-            pdf.path <- paste(getwd(), "results/final/bm", pdf.name, sep = '/')
-            pdf(pdf.path)
+            svg.path <- paste(getwd(), "results/final/bm", svg.name, sep = '/')
+            svg(svg.path)
         } else {
-            pdf.path <- paste(getwd(), "results/test/bm", pdf.name, sep = '/')
-            pdf(pdf.path)
+            svg.path <- paste(getwd(), "results/test/bm", svg.name, sep = '/')
+            svg(svg.path)
         }
     }
 
@@ -41,9 +41,9 @@ single_ballmapper <- function(pointcloud,
                     sep = ' ')
     )
 
-    if(return_bm) {
+    if(save_bm) {
 
-        message(paste("Created:", pdf.path, sep = ' '))
+        message(paste("Created:", svg.path, sep = ' '))
         dev.off()
     }
 }
