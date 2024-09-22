@@ -10,9 +10,9 @@ source(paste(getwd(), "src/functions/single_ballmapper.R", sep = '/'))
 # Single BallMapper -------------------------------------------------------
 # parameters
 c.value <- 0
-chemical <- "glyb"
-water.temp <- "all"
-coloring.variable <- "water.cont"
+chemical <- "hist"
+water.temp <- "5CA"
+coloring.variable <- "diameter"
 
 # check args
 if(chemical == "all") {chemical <- ratio.data[, chem] |> unique()
@@ -25,21 +25,18 @@ if(water.temp == "all") {water.temp <- ratio.data[, water] |> unique()
     stop(paste(water.temp, "is not foudn in data", sep = ' '))
     }
 
+bm.data <- ratio.data[correction == c.value &
+                          chem %in% chemical &
+                          water %in% water.temp]
+
 # point cloud
-pc <- ratio.data[correction == c.value &
-                     chem %in% chemical &
-                     water %in% water.temp,
-                 .(pct.zero.ca, pct.delta.prior)]
+pc <- bm.data[, .(pct.zero.ca, pct.delta.prior)]
 
 # coloring varialbe
-c <- ratio.data[correction == c.value &
-                    chem %in% chemical &
-                    water %in% water.temp,
-                .(parse(text = coloring.variable) |>
-                      eval())]
+c <- bm.data[, .(parse(text = coloring.variable) |> eval())]
 
 # epsilon
-e <- 0.6
+e <- 0.1
 
 single_ballmapper(pointcloud = pc, coloring = c,
-                  epsilon = e, return_bm = 1) |> system.time()
+                  epsilon = e, save_bm = 0) |> system.time()
