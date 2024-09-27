@@ -45,5 +45,7 @@ single_ballmapper <- function(pointcloud,
 
         message(paste("Created:", svg.path, sep = ' '))
         dev.off()
-    }
+    } else(
+        return(single.bm)
+    )
 }
