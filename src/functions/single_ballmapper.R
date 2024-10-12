@@ -34,15 +34,13 @@ single_ballmapper <- function(pointcloud,
                      "\nEpsilon:", epsilon,
                      sep = ' '),
 
-        sub = paste("Pointcloud:", paste(names(pointcloud),
-                                         collapse = ' | '),
+        sub = paste("Pointcloud:", paste(names(pointcloud), collapse = ' | '),
                     "\nColoring:", coloring.variable,
                     "\nN:", pc[, .N],
                     sep = ' ')
     )
 
     if(save_bm) {
-
         message(paste("Created:", svg.path, sep = ' '))
         dev.off()
     } else(

@@ -20,10 +20,8 @@ set_pointcloud_coloring <- function(c, w){
       coloring.values <- ratio.data[chem == c, .(water.cont)]
    }else{
       message(paste("State 4 - chemical:", c, "and water: "), w)
-      pointcloud <- ratio.data[chem == c & water == w,
-                               .(pct.zero.ca, pct.delta.prior)]
-      coloring.values <- ratio.data[chem == c & water == w,
-                                    .(water.cont)]
+      pointcloud <- ratio.data[chem == c & water == w, .(pct.zero.ca, pct.delta.prior)]
+      coloring.values <- ratio.data[chem == c & water == w, .(water.cont)]
    }
 
    bm.data <- list(pointclound = pointcloud,

@@ -10,8 +10,7 @@ clean_turtles <- function(data.file) {
 
    # Load in data file and get data breaks
    tmp.data <- readRDS(paste(getwd(), "data/extracted", data.file, sep = '/'))
-   data.dividers <- {rowSums(is.na(tmp.data)) >= ncol(tmp.data)} |>
-       which()
+   data.dividers <- {rowSums(is.na(tmp.data)) >= ncol(tmp.data)} |> which()
 
    #column names and empty data.table
    dt.names <- c("measure",
@@ -43,8 +42,7 @@ clean_turtles <- function(data.file) {
       for (x in 1:nrow(section.tmp[measure %like% "PSS", 1])){
          section.tmp[measure %like% "PSS", 1][x] <- paste0("PSS.", pss.dt[x])
       }
-      section.tmp[, date := as.numeric(section.tmp[1, 2]) %>%
-                      as.Date(origin = "1899-12-30")]
+      section.tmp[, date := as.numeric(section.tmp[1, 2]) %>% as.Date(origin = "1899-12-30")]
       section.tmp[, water:= section.tmp[1,1]]
       section.tmp[, starting.notes.z1:= section.tmp[1,5]]
       section.tmp[, starting.notes.z2:= section.tmp[1,9]]
