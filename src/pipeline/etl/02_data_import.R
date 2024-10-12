@@ -1,19 +1,16 @@
 #list rds files
-rds.data <- list.files(paste(getwd(), "data/extracted", sep = '/'),
-                       pattern = ".rds") %>%
+rds.data <- list.files(paste(getwd(), "data/extracted", sep = '/'), pattern = ".rds") %>%
     .[-5] # drop hist_base
 
 #run clean_turtles
-rds.data <- lapply(rds.data, clean_turtles) |>
-    invisible()
+rds.data <- lapply(rds.data, clean_turtles) |> invisible()
 
 #combine and reorder
 turtle.data.all <- do.call(rbind, rds.data)
 turtle.names <- c('date', 'water', 'chem', 'measure',
-                  'starting.notes.z1', 'z1',
-                  'pct.zero.ca.z1', 'pct.delta.prior.z1', 'notes.z1',
-                  'starting.notes.z2', 'z2',
-                  'pct.zero.ca.z2', 'pct.delta.prior.z2', 'notes.z2')
+                  'starting.notes.z1', 'z1', 'pct.zero.ca.z1', 'pct.delta.prior.z1', 'notes.z1',
+                  'starting.notes.z2', 'z2', 'pct.zero.ca.z2', 'pct.delta.prior.z2', 'notes.z2'
+                  )
 setcolorder(turtle.data.all, turtle.names)
 
 turtle.data.all[, pct.delta.prior.z1:=as.numeric(pct.delta.prior.z1)] %>%

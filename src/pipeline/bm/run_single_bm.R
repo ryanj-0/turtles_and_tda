@@ -11,7 +11,7 @@ source(paste(getwd(), "src/functions/single_ballmapper.R", sep = '/'))
 # parameters
 c.value <- 0
 chemical <- "hist"
-water.temp <- "5CA"
+water.temp <- "all"
 coloring.variable <- "diameter"
 
 # check args
@@ -36,7 +36,8 @@ pc <- bm.data[, .(pct.zero.ca, pct.delta.prior)]
 c <- bm.data[, .(parse(text = coloring.variable) |> eval())]
 
 # epsilon
-e <- 0.1
+e <- 0.06
 
-single_ballmapper(pointcloud = pc, coloring = c,
-                  epsilon = e, save_bm = 0) |> system.time()
+single.bm <- single_ballmapper(pointcloud = pc, coloring = c,
+                               epsilon = e, save_bm = 0)
+
