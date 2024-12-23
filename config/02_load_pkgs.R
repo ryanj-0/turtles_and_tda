@@ -8,10 +8,6 @@ if (!require("pacman", character.only = TRUE)) {
 # List of packages to be loaded
 pkgs <- c("BallMapper",
           "data.table",
-          "foreach",
-          "furrr",
-          "future",
-          "future.apply",
           "ggExtra",
           "ggrepel",
           "ggthemes",
