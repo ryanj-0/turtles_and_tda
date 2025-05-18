@@ -36,7 +36,7 @@ single_ballmapper <- function(pointcloud,
 
         sub = paste("Pointcloud:", paste(names(pointcloud), collapse = ' | '),
                     "\nColoring:", coloring.variable,
-                    "\nN:", pc[, .N],
+                    "\nN:", nrow(pointcloud),
                     sep = ' ')
     )
 

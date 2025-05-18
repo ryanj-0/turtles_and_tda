@@ -17,10 +17,13 @@ ratio2 <- ratio.data[, c(1:4, 8:11)][ , zone:=2] %>%
 
 ratio.data <- rbind(ratio1, ratio2)
 ratio.data[ , correction:= +(measure %in% corrections)] %>%
-   .[measure == '10K' & chem == 'hist' , correction:= 1]
+   .[measure == '10K' & chem == 'hist' , correction:= 1] %>%
+   .[measure == "PSS.one", correction:= 10] %>%
+   .[measure == "PSS.two", correction:= 11] %>%
+   .[measure == "PSS.three", correction:= 12]
 
 # Add random water and chemical mapping
-set.seed(27)
+set.seed(27) # remove to check for robustness
 water.cont <- c()
 for (n in 1:nrow(ratio.data)) {
    if(ratio.data[n, water] == "21CN"){
@@ -59,7 +62,10 @@ for (n in 1:nrow(ratio.data)) {
    }else{ next }
 }
 
+
 ratio.data <- cbind(ratio.data, water.cont, chem.cont)
+
+saveRDS(ratio.data ,paste(getwd(), "data/exports/ratio_data.rds", sep = "/"))
 
 # remove unneeded variables
 rm(ratio1, ratio2,

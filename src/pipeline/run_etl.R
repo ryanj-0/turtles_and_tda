@@ -6,7 +6,7 @@
 source(paste(getwd(),"src/functions/clean_turtles.R", sep = "/"))
 
 # Extract -----------------------------------------------------------------
-#source(paste(getwd(), "src/pipline/etl/01_data_grab.R", sep = "/")) # as needed
+#source(paste(getwd(), "src/pipline/etl/01_data_grab.R", sep = "/")) # run as needed
 
 
 # Load --------------------------------------------------------------------

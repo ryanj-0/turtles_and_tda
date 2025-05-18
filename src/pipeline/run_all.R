@@ -18,4 +18,5 @@ rm(f, config.files)
 source(paste(getwd(), "src/pipeline", "run_etl.R", sep = "/"))
 
 # EDA
+final = 0
 source(paste(getwd(), "src/pipeline", "run_eda.R", sep = "/"))

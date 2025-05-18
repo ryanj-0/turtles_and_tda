@@ -30,6 +30,19 @@ turtle.data <- turtle.data.all[, .(date, water, chem, measure,
                                    z2, pct.zero.ca.z2, pct.delta.prior.z2,
                                    trial)]
 
+molarMeasures <- turtle.data[grepl(".*M", measure), measure] |> unique() |> sort()
+turtle.data[measure %in% molarMeasures, flagM:=TRUE][measure %notin% molarMeasures, flagM:=FALSE]
+
+
+# aceytl
+
+# fiveht
+# fourap
+# glyb
+# hist
+
+
+
 # fix one-offs
 turtle.data[measure %like% "accidental", 4:= "33.3 uM*"]
 

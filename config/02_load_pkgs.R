@@ -16,6 +16,7 @@ pkgs <- c("BallMapper",
           "igraph",
           "network",
           "patchwork",
+          "pdftools",
           "readxl",
           "tidyverse")
 
