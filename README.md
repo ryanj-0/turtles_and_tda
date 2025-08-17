@@ -1,4 +1,3 @@
-parent::[[qRTPCR Data]]
 
 ```bash
 .
