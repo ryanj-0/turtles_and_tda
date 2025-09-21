@@ -1,20 +1,18 @@
 # Base Case Test ----------------------------------------------------------
-# Global Parameters
-e = 0.04
-chemical = "hist"
-correct <- 0
+pointCloud <- cerebral_data %>%
+   filter(correction != c(1, 10)) %>%
+   select(diameter, pct.zero.ca, pct.delta.prior) |> as.data.frame()
 
-# set global pointblouad and coloring values
-pointcloud <- ratio.data[chem == chemical] |>
-   _[, .(pct.zero.ca, pct.delta.prior)]
-coloring.values <- ratio.data[chem == chemical, .(trial)]
+coloringValues <- cerebral_data %>% pull(water.code) |> as.data.frame()
+
+# Global Parameters
+e = 4
 
 # bm
-ratio.bm <- BallMapper::BallMapper(pointcloud, coloring.values, epsilon = e)
+ratio.bm <- BallMapper::BallMapper(pointCloud, coloringValues, epsilon = e)
 BallMapper::ColorIgraphPlot(ratio.bm, seed_for_plotting = 27)
-title(main = paste0("Point Cloud: Z1&Z2 ratio metric",
-                    "\n Chemical:", chemical,
-                    "\t Coloring:", names(coloring.values)),
+title(main = paste0("Point Cloud: ",
+                    paste(names(pointCloud), collapse = ", ")),
       sub = paste0("epsilon=", e))
 
 
@@ -34,6 +32,25 @@ count_components(g)/ratio.bm[["landmarks"]] %>% length()
 largest_component(g)
 biconnected_components(g)
 decompose(g)
+
+
+# All Combinations BM -----------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # testing parallel --------------------------------------------------------
