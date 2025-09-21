@@ -1,7 +1,7 @@
 # Observations by Water Temperature
 
 # some data work
-water.groups <- turtle.data %>%
+water.groups <- cerebral_data %>%
    group_by(water, chem) %>%
    count()
 water.tots <- water.groups %>%
@@ -22,7 +22,7 @@ g.plot <- water.groups |>
              fontface = "bold")+
     labs(
         title = "Observations by Water Temperature",
-        caption = paste("N =", nrow(turtle.data)),
+        caption = paste("N =", nrow(cerebral_data)),
         x = "Water Temperature", y = "Count",
         fill = "Chemical") +
     scale_fill_viridis_d() +
@@ -40,7 +40,7 @@ if(final == 1){
 } else {
     ggsave("observations_by_water_temp.pdf",
            plot = g.plot,
-           path = paste(getwd(), "results/test/eda", sep = '/'),
+           path = getwd(),
            width = 14, height = 6.32, units = "in")
 }
 

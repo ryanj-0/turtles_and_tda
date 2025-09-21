@@ -26,7 +26,7 @@ if(!dir.exists(paste(getwd(), "data", sep = "/"))){
     message("'Raw' data directory exists.")
     import_new <- readline("Import new raw data? (Y/N)?: ") |> str_to_title()
     if(import_new %in% c("Y", "Yes")){
-        source(paste(getwd(), "src/scripts/import_rawData.R", sep = "/"))
+        source(paste(getwd(), "src/scripts/extract_rawData.R", sep = "/"))
     }
 }
 

@@ -1,5 +1,5 @@
 # Frequency plot by Measure
-g.plot <- turtle.data |>
+g.plot <- cerebral_data |>
     ggplot(aes(x = measure |> fct_infreq())) +
     geom_bar(aes(fill = chem), position = position_stack(reverse = TRUE)) +
     scale_fill_viridis_d() +
@@ -9,7 +9,7 @@ g.plot <- turtle.data |>
     labs(
         title = "Frequency plot by Measure",
         subtitle = "Total Counts",
-        caption = paste("N =", nrow(turtle.data)),
+        caption = paste("N =", nrow(cerebral_data)),
         x = "Counts", y = "Type of Measure",
         fill = "Chemical:") +
     theme(legend.position = "bottom") +
@@ -28,7 +28,7 @@ if(final == 1){
 } else {
     ggsave("freq_by_measure.pdf",
            plot = g.plot,
-           path = paste(getwd(), "results/test/eda", sep = '/'),
+           path = getwd(),
            width = 14, height = 6.32, units = "in")
 }
 rm(g.plot)
