@@ -1,39 +1,7 @@
 
-qRTPCR_files <- list.files(paste(getwd(), "data/raw/qRTPCR", sep = "/"),
-                           full.names = TRUE) %>% as_tibble()
-bioRad_dirs <- list.files(paste(getwd(), "data/raw/qRTPCR/BioRad Files", sep = "/"),
-                          full.names = TRUE)
-bioRad_dirNames <- list.files(paste(getwd(), "data/raw/qRTPCR/BioRad Files",
-                                 sep = "/")) %>%
-    as_tibble() %>%
-    rename(pcrRun = value)
 
-fileVec <- c()
 
-for(f in bioRad_dirs){
 
-    nFiles <- list.files(f) %>% length()
-    fileVec <- c(fileVec, nFiles)
-}
-
-bioRad_coverage <- cbind(bioRad_dirNames, fileVec)
-
-ggplot(bioRad_coverage[1:55,], aes(x = pcrRun, y = fileVec)) +
-    geom_col() +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1))
-
-qRTPCR_data <- qRTPCR_files %>%
-    filter(value %like% ".xlsx")
-
-source(paste(getwd(), "dev/04_bioRad_data.R", sep = '/'))
-
-### Extract 2022_0101_rtPCR_ALL.xlsx sheets
-qRTPCR_channel_sheets <- qRTPCR_data[5, ] |>
-    unlist() |>
-    excel_sheets() %>%
-    .[1:3]
-
-qRTPCR_all <- lapply(qRTPCR_channel_sheets, extract_qrtpcr_channels)
 
 for( t in qRTPCR_all){
     tmp <- full_join(t, test, relationship = "many-to-many") %>%
