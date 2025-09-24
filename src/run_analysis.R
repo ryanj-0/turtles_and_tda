@@ -15,7 +15,7 @@ sapply(list.files(paste(getwd(), "src/functions", sep = "/"),
                   full.names = TRUE), source)
 
 
-# Etraxt, Transform, and Load ----
+# Extract, Transform, and Load ----
 # check for data directory for new users
 if(!dir.exists(paste(getwd(), "data", sep = "/"))){
     message("created 'Data' directory, please see the tree structure
