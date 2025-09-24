@@ -5,6 +5,7 @@
 transform_raw_bioRad_data <- function(bioRad_extracted_group){
 
     transform_selector <- bioRad_extracted_group$file_code |> unique()
+    valueName <- bioRad_extracted_group$file_cat |> unique()
 
     if(transform_selector %in% c(2,3,5)){
 
@@ -17,7 +18,8 @@ transform_raw_bioRad_data <- function(bioRad_extracted_group){
                          values_to = "Value") |>
             mutate(Well = if_else(nchar(Well) == 2,
                                   gsub("^([A-Z]{1})([0-9])+$", "\\10\\2", Well),
-                                  Well))
+                                  Well)) |>
+            rename_with(~valueName, Value)
 
     } else if(transform_selector %in% c(1,4,6)){
 
@@ -25,7 +27,6 @@ transform_raw_bioRad_data <- function(bioRad_extracted_group){
         #   End Point Results
         #   Melt_Curve_Peak_Results
         #   Quant_Cq_Results
-
         return_transformed <- bioRad_extracted_group
 
     } else{
