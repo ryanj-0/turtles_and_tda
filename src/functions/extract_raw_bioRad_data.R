@@ -8,7 +8,7 @@ extract_raw_bioRad_data <- function(bioRad_raw_group){
     bioRad_raw_group <- bioRad_raw_group |>
         mutate(file_type = str_extract(bioRad_raw_group$file_name,
                                        "(?<=(.xlsx\\s-\\s)).*(?=.csv)"),
-               run_num = str_extract(bioRad_raw_group$file_name,
+               Plate = str_extract(bioRad_raw_group$file_name,
                                      "(?<=(Files/)).*(?=/)"))
 
     # Extract BioRad Run Data
@@ -36,7 +36,7 @@ extract_raw_bioRad_data <- function(bioRad_raw_group){
     # Join extracted data
     return_bioRad_group <- full_join(bioRad_runData, bioRad_runInfo,
                                      by = join_by("file_name", "file_code",
-                                                  "run_num")) |>
+                                                  "Plate")) |>
         select(-c(file_name)) |>
         mutate(file_cat = case_when(file_code == 1 ~ "End_Point",
                                     file_code == 2 ~ "MeltCurve_Amp",
