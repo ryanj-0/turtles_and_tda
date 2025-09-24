@@ -23,4 +23,4 @@
 
 19 directories
 ```
-\* files are stored on the GitHub repository [_turtles_and_TDA_](https://github.com/ryanj-0/turtles_and_tda). All other project files are on the shared [_Hannah Lab Reserach_](https://drive.google.com/drive/folders/0APz27o4HjpDzUk9PVA?dmr=1&ec=wgc-drive-globalnav-goto) Google Drive. Users will need to be granted access. To request access please email: [Rachel Hannah](mailto:rmhannah@alaska.edu)
+\* files are stored on the GitHub repository [_turtles_and_TDA_](https://github.com/ryanj-0/turtles_and_tda). All other project files will need to be requested for access.
