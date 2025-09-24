@@ -6,7 +6,7 @@ extract_qrtpcr_channels <- function(channel) {
         paste(getwd(),"data/raw/qRTPCR/2022_0101_rtPCR ALL.xlsx", sep = "/"),
         sheet = channel,
         range = cell_cols("B:V")) |>
-        mutate(Position = ifelse(nchar(Position)<3,
+        mutate(Position = ifelse(nchar(Position) < 3,
                                  gsub("(^.{1})(.*)$","\\10\\2", Position),
                                  Position)) |>
         mutate(channel = channel, .after = Researcher) |>
@@ -19,5 +19,7 @@ extract_qrtpcr_channels <- function(channel) {
     file_name <- paste0(getwd(), "/data/processed/qRTPCR/channel_",
                         saveChannel, ".rds")
     saveRDS(qRTPCR_channel, file_name)
+
+    return(qRTPCR_channel)
 
 }
