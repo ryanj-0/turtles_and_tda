@@ -11,8 +11,6 @@ HLR_rawData <- drive_ls(as_id(HLR_data))[1,2] |> unlist()
 HLR_rawBioRad_id <- drive_ls(as_id(HLR_rawData))[1,2] |> unlist()
 HLR_rawCerebral_id <- drive_ls(as_id(HLR_rawData))[2,2] |> unlist()
 
-
-
 # Cerebral Vessel Data ----------------------------------------------------
 
 # data sheet names
@@ -61,6 +59,6 @@ bioRad_transformed_list <- lapply(bioRad_rawData, transform_raw_bioRad_data)
 
 plateData_sheets <- excel_sheets(
     paste(getwd(),"data/raw/qRTPCR/2022_0101_rtPCR ALL.xlsx", sep = "/")) |>
-    .[1:3]
+    _[1:3]
 
 plateData_raw <- lapply(plateData_sheets, extract_qrtpcr_channels)
