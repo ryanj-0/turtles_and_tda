@@ -9,11 +9,11 @@ hist.list <- data.table(fixed = rep(0.068, 5),
                         high = c(0.068, 0.15, 0.20, 0.10, 0.15),
                         lower = c())
 
-source(paste(getwd(), "src/pipeline/bm/run_single_bm.R"))
+source(paste(getwd(), "src/bm/run_single_bm.R"))
 
 
 list.files(paste(getwd(), "results/test/bm/", sep = '/'))
 
 
 # BM Graphs Loop ----------------------------------------------------------
-source(paste(getwd(), "src/pipeline/bm/run_bm_loop.R"))
+source(paste(getwd(), "src/bm/run_bm_loop.R"))

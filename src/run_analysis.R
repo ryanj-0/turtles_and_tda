@@ -13,7 +13,6 @@ source(paste(getwd(), "src/config.R", sep = "/"))
 sapply(list.files(paste(getwd(), "src/functions", sep = "/"),
                   full.names = TRUE), source)
 
-
 # Extract, Transform, and Load ----
 # check for data directory for new users, if not create new dir
 if(!dir.exists(paste(getwd(), "data", sep = "/"))){
@@ -25,15 +24,15 @@ if(!dir.exists(paste(getwd(), "data", sep = "/"))){
     message("'Raw' data directory exists. Select 'N' if no new data.")
     import_new <- readline("Import new raw data? (Y/N): ") |> str_to_title()
     if(import_new %in% c("Y", "Yes")){
-        source(paste(getwd(), "src/scripts/extract_rawData.R", sep = "/"))
+        source(paste(getwd(), "src/extract_rawData.R", sep = "/"))
     }
 }
 
 ## import extracted data
-source(paste(getwd(), "src/scripts/import_processedData.R", sep = "/"))
+source(paste(getwd(), "src/import_processedData.R", sep = "/"))
 
 
 # EDA ----
 final = 0
-sapply(list.files(paste(getwd(), "src/plots", sep = "/"), full.names = TRUE),
+sapply(list.files(paste(getwd(), "plots", sep = "/"), full.names = TRUE),
        source)
