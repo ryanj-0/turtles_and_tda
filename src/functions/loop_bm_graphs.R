@@ -1,3 +1,6 @@
+##############################################
+# Loop to generate BallMapper graphs for each chemical and water temp
+##############################################
 loop_bm_graphs <- function(c.table){
 
    pdf(

@@ -1,5 +1,5 @@
 #########################
-# Extact BioRad Run Data for each path in group
+# Extract BioRad Run Data for each path in group
 #########################
 
 extract_raw_bioRad_runData <- function(runData_path){

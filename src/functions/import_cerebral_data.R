@@ -5,7 +5,7 @@
 import_cerebral_data <- function(data_file) {
 
    # set file name
-   chem_name <- str_extract(data_file, ".+(?=.rds)")
+   chem_name <- str_extract(data_file, ".+(?=\\.rds)")
    message("Cleaning and Importing: ", chem_name)
 
    # Load in data file

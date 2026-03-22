@@ -1,4 +1,6 @@
-# Function to extract 2022_0101_rtPCR_ALL.xlsx sheets
+##############################################
+# Extract channel metadata from 2022_0101_rtPCR_ALL.xlsx
+##############################################
 
 extract_qrtpcr_channels <- function(channel) {
 

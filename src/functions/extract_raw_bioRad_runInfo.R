@@ -1,5 +1,5 @@
 ##################
-# Extact BioRad run information for each path
+# Extract BioRad run information for each path
 #########################
 
 extract_raw_bioRad_runInfo <- function(runInfo_path){

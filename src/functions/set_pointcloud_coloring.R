@@ -1,6 +1,9 @@
+##############################################
+# Set pointcloud and coloring values for BallMapper
+##############################################
 set_pointcloud_coloring <- function(c, w){
 
-   # set global pointclouad and coloring values
+   # set global pointcloud and coloring values
    pointcloud <- ratio.data[correction == correct]
    coloring.values <- ratio.data[correction == correct, .(water.cont)]
 
@@ -24,7 +27,7 @@ set_pointcloud_coloring <- function(c, w){
       coloring.values <- ratio.data[chem == c & water == w, .(water.cont)]
    }
 
-   bm.data <- list(pointclound = pointcloud,
+   bm.data <- list(pointcloud = pointcloud,
                    coloring.values = coloring.values)
    return(bm.data)
 }

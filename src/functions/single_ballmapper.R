@@ -1,3 +1,6 @@
+##############################################
+# Run a single BallMapper analysis and optionally save as SVG
+##############################################
 single_ballmapper <- function(pointcloud,
                               coloring,
                               epsilon,
