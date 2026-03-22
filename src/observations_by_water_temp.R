@@ -25,7 +25,7 @@ g.plot <- water.groups |>
         caption = paste("N =", nrow(cerebral_data)),
         x = "Water Temperature", y = "Count",
         fill = "Chemical") +
-    scale_fill_viridis_d() +
+    scale_fill_manual(values = c("#0072B2", "#66C2A5", "#AA3377", "#F0E442", "#FF9F1C")) +
     scale_y_continuous(expand = expansion(mult = c(0, 0.05)))
 
 # preview
@@ -40,7 +40,7 @@ if(final == 1){
 } else {
     ggsave("observations_by_water_temp.pdf",
            plot = g.plot,
-           path = getwd(),
+           path = file.path(getwd(), "plots"),
            width = 14, height = 6.32, units = "in")
 }
 
