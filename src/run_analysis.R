@@ -15,16 +15,17 @@ sapply(list.files(paste(getwd(), "src/functions", sep = "/"),
 
 # Extract, Transform, and Load ----
 # check for data directory for new users, if not create new dir
-if(!dir.exists(paste(getwd(), "data", sep = "/"))){
-    message("created 'Data' directory, please see the tree structure
+data_dir <- file.path(getwd(), "data")
+if (!dir.exists(data_dir)) {
+    message("created 'data' directory, please see the tree structure
     below to reduce errors.")
-    dir.create(paste(getwd(), "data", sep = "/"))
-    fs:::dir_tree(paste(getwd(), "data", sep = "/"), recurse = FALSE)
-} else{
-    message("'Raw' data directory exists. Select 'N' if no new data.")
-    import_new <- readline("Import new raw data? (Y/N): ") |> str_to_title()
-    if(import_new %in% c("Y", "Yes")){
-        source(paste(getwd(), "src/extract_rawData.R", sep = "/"))
+    dir.create(data_dir)
+    fs::dir_tree(data_dir, recurse = FALSE)
+} else {
+    message("'data' directory exists. Select 'N' if no new data.")
+    import_new <- readline("Import new raw data? (Y/N): ") |> tolower()
+    if (import_new %in% c("y", "yes")) {
+        source(file.path(getwd(), "src/extract_rawData.R"))
     }
 }
 
