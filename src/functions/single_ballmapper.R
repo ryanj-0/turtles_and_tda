@@ -4,7 +4,8 @@
 single_ballmapper <- function(pointcloud,
                               coloring,
                               epsilon,
-                              save_bm = TRUE) {
+                              save_bm = FALSE,
+                              save_dir = paste(getwd(), "results", sep = '/')) {
     # Error checking, TBD
 
     # Set locals
@@ -19,14 +20,8 @@ single_ballmapper <- function(pointcloud,
     if(save_bm) {
 
         svg.name <- paste0(paste(chemical, water.temp, e, sep = '_'), ".svg")
-
-        if(final == 1){
-            svg.path <- paste(getwd(), "results/final/bm", svg.name, sep = '/')
-            svg(svg.path)
-        } else {
-            svg.path <- paste(getwd(), "results/test/bm", svg.name, sep = '/')
-            svg(svg.path)
-        }
+        svg.path <- paste(save_dir, svg.name, sep = '/')
+        svg(svg.path)
     }
 
     ColorIgraphPlot(outputFromBallMapper = single.bm,
