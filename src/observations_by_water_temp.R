@@ -1,15 +1,15 @@
 # Observations by Water Temperature
 
 # some data work
-water.groups <- cerebral_data %>%
-   group_by(water, chem) %>%
+water.groups <- cerebral_data |>
+   group_by(water, chem) |>
    count()
-water.tots <- water.groups %>%
-   group_by(water) %>%
+water.tots <- water.groups |>
+   group_by(water) |>
    summarise(temp_totals = sum(n))
 
-water.groups <- inner_join(water.groups, water.tots, by = "water") %>%
-    mutate(pct = round(n/temp_totals*100, 1)) %>%
+water.groups <- inner_join(water.groups, water.tots, by = "water") |>
+    mutate(pct = round(n/temp_totals*100, 1)) |>
     ungroup()
 
 

@@ -35,5 +35,5 @@ source(paste(getwd(), "src/import_processedData.R", sep = "/"))
 
 # EDA ----
 final = 0
-sapply(list.files(paste(getwd(), "plots", sep = "/"), full.names = TRUE),
-       source)
+source(file.path(getwd(), "src/freq_by_measure.R"))
+source(file.path(getwd(), "src/observations_by_water_temp.R"))

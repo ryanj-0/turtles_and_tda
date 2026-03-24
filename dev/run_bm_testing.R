@@ -1,26 +1,42 @@
 # Base Case Test ----------------------------------------------------------
-pointCloud <- cerebral_data %>%
-   filter(correction != c(1, 10)) %>%
-   select(diameter, pct.zero.ca, pct.delta.prior) |> as.data.frame()
+pointCloud_data <-
+   cerebral_data #|> filter(correction != c(1, 10))
 
-coloringValues <- cerebral_data %>% pull(water.code) |> as.data.frame()
+pointCloud <-
+   pointCloud_data |>
+   select(pct.zero.ca, pct.delta.prior) |>
+   as.data.frame()
+
+coloringValues <-
+   pointCloud_data |>
+   select(correction) |>
+   as.data.frame()
 
 # Global Parameters
-e = 4
+e = 0.065
 
 # bm
 ratio.bm <- BallMapper::BallMapper(pointCloud, coloringValues, epsilon = e)
+
+svg(paste(getwd(), "src/plots", "bmGraph_pss_60k.svg", sep = "/"))
 BallMapper::ColorIgraphPlot(ratio.bm, seed_for_plotting = 27)
 title(main = paste0("Point Cloud: ",
-                    paste(names(pointCloud), collapse = ", ")),
+                    paste(names(pointCloud), collapse = ", "), "\n",
+                    "Coloring: ", names(coloringValues),
+                    " | 10 = PSS, 1 = 60k"),
       sub = paste0("epsilon=", e))
+dev.off()
 
+rowCoverage <- points_covered_by_landmarks(ratio.bm, 14)
+pointCloud_data |>
+   slice(rowCoverage) |>
+   view()
 
 # BallMapper Metrics
 # vertices
-bm.verts <- ratio.bm[['vertices']] %>% as.data.table()
+bm.verts <- ratio.bm[['vertices']] |> as.data.table()
 # Edges
-bm.edges <- ratio.bm[['edges']] %>% as.data.table()
+bm.edges <- ratio.bm[['edges']] |> as.data.table()
 
 # Graph Object
 bm.verts[, 2] <- 20 * bm.verts[, 2]/max(bm.verts[, 2]) + 7
@@ -28,23 +44,51 @@ g <- igraph::graph_from_data_frame(bm.edges,
                                    vertices = bm.verts,
                                    directed = FALSE)
 count_components(g)
-count_components(g)/ratio.bm[["landmarks"]] %>% length()
+count_components(g)/ratio.bm[["landmarks"]] |> length()
 largest_component(g)
 biconnected_components(g)
 decompose(g)
 
-
-# All Combinations BM -----------------------------------------------------
-
+# Quick Save --------------------------------------------------------------
 
 
 
 
 
+# BM Loop for Chem --------------------------------------------------------
 
+chemList <-
+   pointCloud_data |>
+   pull(chem) |>
+   unique()
 
+bmFunction <- function(chemChoice) {
 
+   pointCloud <-
+      pointCloud_data |>
+      filter(chem == chemChoice) |>
+      select(pct.zero.ca, pct.delta.prior) |>
+      as.data.frame()
 
+   coloringValues <-
+      pointCloud_data |>
+      filter(chem == chemChoice) |>
+      select(correction) |>
+      as.data.frame()
+
+   # Global Parameters
+   e = 0.04
+
+   ratio.bm <- BallMapper::BallMapper(pointCloud, coloringValues, epsilon = e)
+   ratioPlot <- BallMapper::ColorIgraphPlot(ratio.bm, seed_for_plotting = 27)
+   title(main = paste0("Point Cloud: ",
+                       paste(names(pointCloud), collapse = ", "), "\n",
+                       "Coloring: ", names(coloringValues),
+                       " | 10 = PSS, 1 = 60k"),
+         sub = paste0("epsilon=", e, " | chem: ", chemChoice))
+}
+
+lapply(chemList, bmFunction)
 
 
 
@@ -72,19 +116,19 @@ if(chemical == "all" & water.temp == "all"){
    pointcloud <- ratio.data[correction == correct,
                             .(pct.zero.ca, pct.delta.prior)]
    coloring.values <- ratio.data[correction == correct,
-                                 water.cont] %>% as.data.frame()
+                                 water.cont] |> as.data.frame()
 }else if(chemical=="all" & water.temp!="all") {
    message(paste("State 2 - running chemical: all and water:"), water.temp)
    pointcloud <- ratio.data[correction == correct & water == water.temp,
                             .(pct.zero.ca, pct.delta.prior)]
    coloring.values <- ratio.data[correction == correct & water == water.temp,
-                                 water.cont] %>% as.data.frame()
+                                 water.cont] |> as.data.frame()
 }else if(chemical!="all" & water.temp=="all") {
    message(paste("State 3 - running chemical:", chemical, "and water: all"))
    pointcloud <- ratio.data[correction == correct & chem == chemical,
                             .(pct.zero.ca, pct.delta.prior)]
    coloring.values <- ratio.data[correction == correct & chem == chemical,
-                                 water.cont] %>% as.data.frame()
+                                 water.cont] |> as.data.frame()
 }else{
    message(paste("State 4 - running chemical:", chemical,
                   "and water:"), water.temp)
@@ -93,7 +137,7 @@ if(chemical == "all" & water.temp == "all"){
                             .(pct.zero.ca, pct.delta.prior)]
    coloring.values <- ratio.data[correction == correct &
                                     chem == chemical& water == water.temp,
-                                 water.cont] %>% as.data.frame()
+                                 water.cont] |> as.data.frame()
 }
 
 # run parallel BallMapper
@@ -114,7 +158,7 @@ cols.plot <- ggplot(connected.componets, aes(x = epsilons, y = cmpts)) +
    geom_col(aes(fill = row_number(epsilons) %% 2 == 0),
             show.legend = FALSE) +
    geom_text(aes(label = cmpts),
-             data = . %>% filter(row_number() %% 3 == 0),
+             data = . |> filter(row_number() %% 3 == 0),
              vjust = -0.5) +
    scale_y_continuous(name = "# of Conn. Cmpnts.",
                       n.breaks = 10,
@@ -128,22 +172,22 @@ pops.plot <- ggplot(connected.componets, aes(x = epsilons, y = change)) +
    geom_line(color = "grey80") +
    geom_hline(aes(yintercept = 0), color = "grey50", linetype = "dashed") +
    geom_point(aes(size = -change),
-              data = . %>% filter(change != 0),
+              data = . |> filter(change != 0),
               shape = 21,
               fill = "grey",
               show.legend = FALSE) +
-   geom_point(data = . %>% filter(change == 0),
+   geom_point(data = . |> filter(change == 0),
               shape = 19,
               size = 2,
               color = "red",
               show.legend = FALSE) +
-   geom_point(data = . %>% filter(change > 0),
+   geom_point(data = . |> filter(change > 0),
               shape = 19,
               size = 2,
               color = "blue",
               show.legend = FALSE) +
    geom_text_repel(aes(label = change),
-                   data = . %>% filter(row_number() %% 7 == 0),
+                   data = . |> filter(row_number() %% 7 == 0),
                    vjust = 2) +
    scale_y_continuous(name = paste("Delta Conn. Cmpnts."),
                       expand = expansion(mult = c(0.1, 0.05))) +

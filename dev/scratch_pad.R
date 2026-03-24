@@ -8,19 +8,19 @@ if(chemical=="all" & water.temp=="all"){
    pointcloud <- ratio.data[correction == correct,
                             .(pct.zero.ca, pct.delta.prior)]
    coloring.values <- ratio.data[correction == correct,
-                                 water.cont] %>% as.data.frame()
+                                 water.cont] |> as.data.frame()
 }else if(chemical=="all" & water.temp!="all") {
    message(paste("State 2 - running chemical: all and water:"), water.temp)
    pointcloud <- ratio.data[correction == correct & water == water.temp,
                             .(pct.zero.ca, pct.delta.prior)]
    coloring.values <- ratio.data[correction == correct & water == water.temp,
-                                 water.cont] %>% as.data.frame()
+                                 water.cont] |> as.data.frame()
 }else if(chemical!="all" & water.temp=="all") {
    message(paste("State 3 - running chemical:", chemical, "and water: all"))
    pointcloud <- ratio.data[correction == correct & chem == chemical,
                             .(pct.zero.ca, pct.delta.prior)]
    coloring.values <- ratio.data[correction == correct & chem == chemical,
-                                 water.cont] %>% as.data.frame()
+                                 water.cont] |> as.data.frame()
 }else{
    message(paste("State 4 - running chemical:", chemical,
                  "and water:"), water.temp)
@@ -29,7 +29,7 @@ if(chemical=="all" & water.temp=="all"){
                             .(pct.zero.ca, pct.delta.prior)]
    coloring.values <- ratio.data[correction == correct &
                                     chem == chemical& water == water.temp,
-                                 water.cont] %>% as.data.frame()
+                                 water.cont] |> as.data.frame()
 }
 
 
@@ -42,10 +42,10 @@ while(TRUE){
    ratio.bm <- BallMapper::BallMapper(pointcloud, coloring.values, epsilon = e)
 
    # vertices
-   bm.verts <- ratio.bm[['vertices']] %>% as.data.table()
+   bm.verts <- ratio.bm[['vertices']] |> as.data.table()
    bm.verts[, 2] <- 20 * bm.verts[, 2]/max(bm.verts[, 2]) + 7
    # Edges
-   bm.edges <- ratio.bm[['edges']] %>% as.data.table()
+   bm.edges <- ratio.bm[['edges']] |> as.data.table()
 
 
    g <- igraph::graph_from_data_frame(bm.edges,
@@ -77,10 +77,10 @@ while(TRUE){
    ratio.bm <- BallMapper::BallMapper(pointcloud, coloring.values, epsilon = e)
 
    # vertices
-   bm.verts <- ratio.bm[['vertices']] %>% as.data.table()
+   bm.verts <- ratio.bm[['vertices']] |> as.data.table()
    bm.verts[, 2] <- 20 * bm.verts[, 2]/max(bm.verts[, 2]) + 7
    # Edges
-   bm.edges <- ratio.bm[['edges']] %>% as.data.table()
+   bm.edges <- ratio.bm[['edges']] |> as.data.table()
    g <- igraph::graph_from_data_frame(bm.edges,
                                       vertices = bm.verts,
                                       directed = FALSE)
@@ -116,19 +116,19 @@ test.function <- function(dt) {
       pointcloud <- ratio.data[correction == correct,
                                .(pct.zero.ca, pct.delta.prior)]
       coloring.values <- ratio.data[correction == correct,
-                                    water.cont] %>% as.data.frame()
+                                    water.cont] |> as.data.frame()
    }else if(chems == "all" & temps != "all") {
       message(paste("State 2 - running chemical: all and water: "), temps)
       pointcloud <- ratio.data[correction == correct & water == temps,
                                .(pct.zero.ca, pct.delta.prior)]
       coloring.values <- ratio.data[correction == correct & water == temps,
-                                    water.cont] %>% as.data.frame()
+                                    water.cont] |> as.data.frame()
    }else if(chems!="all" & temps == "all") {
       message(paste("State 3 - running chemical:", chems, "and water: all"))
       pointcloud <- ratio.data[correction == correct & chem == chems,
                                .(pct.zero.ca, pct.delta.prior)]
       coloring.values <- ratio.data[correction == correct & chem == chems,
-                                    water.cont] %>% as.data.frame()
+                                    water.cont] |> as.data.frame()
    }else{
       message(paste("State 4 - running chemical:", chems,
                     "and water: "), temps)
@@ -137,7 +137,7 @@ test.function <- function(dt) {
                                .(pct.zero.ca, pct.delta.prior)]
       coloring.values <- ratio.data[correction == correct &
                                        chem == chems& water == temps,
-                                    water.cont] %>% as.data.frame()
+                                    water.cont] |> as.data.frame()
    }
 }
 
@@ -150,7 +150,7 @@ test.function <- function(dt) {
 
 # BallMapper Metrics
 count_components(g)
-count_components(g)/ratio.bm[["landmarks"]] %>% length()
+count_components(g)/ratio.bm[["landmarks"]] |> length()
 largest_component(g)
 biconnected_components(g)
 decompose(g)

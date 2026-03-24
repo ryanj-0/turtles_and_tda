@@ -69,7 +69,7 @@ for (r in 1:nrow(bounds)) {
       geom_col(aes(fill = row_number(epsilons) %% 2 == 0),
                show.legend = FALSE) +
       geom_text(aes(label = cmpts),
-                data = . %>% filter(row_number() %% 3 == 0),
+                data = . |> filter(row_number() %% 3 == 0),
                 vjust = -0.5) +
       scale_y_continuous(name = "# of Conn. Cmpnts.",
                          n.breaks = 10,
@@ -83,22 +83,22 @@ for (r in 1:nrow(bounds)) {
       geom_line(color = "grey80") +
       geom_hline(aes(yintercept = 0), color = "grey50", linetype = "dashed") +
       geom_point(aes(size = -change),
-                 data = . %>% filter(change != 0),
+                 data = . |> filter(change != 0),
                  shape = 21,
                  fill = "grey",
                  show.legend = FALSE) +
-      geom_point(data = . %>% filter(change == 0),
+      geom_point(data = . |> filter(change == 0),
                  shape = 19,
                  size = 2,
                  color = "red",
                  show.legend = FALSE) +
-      geom_point(data = . %>% filter(change > 0),
+      geom_point(data = . |> filter(change > 0),
                  shape = 19,
                  size = 2,
                  color = "blue",
                  show.legend = FALSE) +
       geom_text_repel(aes(label = change),
-                      data = . %>% filter(row_number() %% 7 == 0),
+                      data = . |> filter(row_number() %% 7 == 0),
                       vjust = 2) +
       scale_y_continuous(name = paste("Delta Conn. Cmpnts."),
                          expand = expansion(mult = c(0.1, 0.05))) +

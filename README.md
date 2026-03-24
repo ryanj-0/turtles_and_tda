@@ -1,5 +1,8 @@
+# turtles_and_TDA
 
-```bash
+## Project Structure
+
+```
 .
 ├── config*
 ├── data
@@ -24,3 +27,7 @@
 19 directories
 ```
 \* files are stored on the GitHub repository [_turtles_and_TDA_](https://github.com/ryanj-0/turtles_and_tda). All other project files will need to be requested for access.
+
+## Acknowledgements
+
+This project was developed with AI assistance from [Claude](https://www.anthropic.com/claude) by Anthropic.
