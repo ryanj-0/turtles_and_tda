@@ -12,7 +12,7 @@ bm_ggraph <- function(bm_igraph_output, coloring, epsilon, legend_label = NULL) 
 
     num_nodes <- vcount(bm_igraph_output)
 
-    ggraph(bm_igraph_output, layout = "kk") +
+    ggraph(bm_igraph_output, layout = "stress") +
         geom_edge_link(
             aes(width = weight,
                 color = weight > mean(weight)
@@ -37,8 +37,7 @@ bm_ggraph <- function(bm_igraph_output, coloring, epsilon, legend_label = NULL) 
             stroke = 0.5
         ) +
         geom_node_text(
-            aes(label = name
-            )
+            aes(label = name)
         ) +
         scale_size_area(
             max_size = 25,
@@ -60,6 +59,7 @@ bm_ggraph <- function(bm_igraph_output, coloring, epsilon, legend_label = NULL) 
             subtitle = paste("Epsilon:", epsilon),
             caption = paste("Nodes:", num_nodes)
         ) +
+        coord_cartesian(clip = "off") +
         theme_void() +
         theme(
             legend.position = "bottom",
