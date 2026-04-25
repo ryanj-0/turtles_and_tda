@@ -3,16 +3,18 @@
 # graph it in a ggraph output for
 # easier readability.
 ############################################
-bm_ggraph <- function(bm_igraph_output, coloring, epsilon, legend_label = NULL) {
+bm_ggraph <- function(bm_igraph_output, coloring, epsilon,
+                      legend_label = NULL, layout = "auto") {
 
     # Set graph details
     coloring_name <- coloring |>
         names() |>
-        str_replace_all("_", " ")
+        str_replace_all("_", " ") |>
+        str_to_title()
 
     num_nodes <- vcount(bm_igraph_output)
 
-    ggraph(bm_igraph_output, layout = "stress") +
+    ggraph(bm_igraph_output, layout = layout) +
         geom_edge_link(
             aes(width = weight,
                 color = weight > mean(weight)

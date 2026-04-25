@@ -44,7 +44,9 @@ clean_cerebral_data <- function(section) {
                                      chem == "5HT" ~ 2,
                                      chem == "4AP" ~ 3,
                                      chem == "Glybenclamide" ~ 4,
-                                     chem == "Histamine" ~ 5))
+                                     chem == "Histamine" ~ 5)) |>
+        mutate(anoxic = case_when(water %like% "A" ~ 1, .default = 0),
+               .after = water)
 
     return(section)
 }

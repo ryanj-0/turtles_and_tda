@@ -34,18 +34,9 @@ existing_user <- tryCatch({
 
 if (!is.null(existing_user)) {
     message("Google account found: ", existing_user)
-    continue <- readline("Continue with this account? (Y/N): ") |> stringr::str_to_title()
-    if (!continue %in% c("Y", "Yes")) {
-        googledrive::drive_auth()
-    }
 } else {
-    message("No Google account detected. You will need to sign in.")
-    login <- readline("Continue to login? (Y/N): ") |> stringr::str_to_title()
-    if (login %in% c("Y", "Yes")) {
-        googledrive::drive_auth()
-    } else {
-        message("Skipping Google Drive authentication. Drive features will not be available.")
-    }
+    message("No Google account found. Launching authorization...")
+    googledrive::drive_auth()
 }
 
 googlesheets4::gs4_auth(token = googledrive::drive_token())

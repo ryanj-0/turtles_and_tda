@@ -28,7 +28,7 @@ lapply(cerebral_sheets, extract_raw_cerebral_data)
 # qRTPCR Data -------------------------------------------------------------
 
 # BioRad Data ----
-# Gene Expression, Quantificaiton Plate View/Summary,
+# Gene Expression, Quantification Plate View/Summary,
 # and Melt Curve Plate View/Summary are not necessary tables or are empty.
 # We drop the aforementioned files marked NA. Group by file name and split.
 bioRad_raw_groupList <- list.files(
